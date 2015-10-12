@@ -1,14 +1,28 @@
 angular.module('jupitr.cohort', [])
-  .controller('cohortController', function($scope){
-
+  .controller('cohortController', function($scope, User){
+    $scope.profiles = [];
+    $scope.init = function () {
+      User.getAll(function(data) {
+        $scope.profiles = data;
+        //console.log(data);
+        console.log($scope.profiles);
+      });
+    };
+    $scope.init();
   })
   .directive('cohortVis', function(){
     return {
       restrict: 'EA',
       link: function(scope, elem, attrs){
+        scope.getAll(function(data){
+          if (data) {
+            data = JSON.stringify(data);
+            // store data in localstorage
+            window.localStorage.setItem('hrr8.jupitr', data);
+          }
         var width = window.innerWidth*0.90;
         var height = window.innerHeight - 300;
-
+        //console.log(elmem[0]);
         var svg = d3.select(elem[0])
           .append('svg')
           .attr('width', '100%')
@@ -16,11 +30,16 @@ angular.module('jupitr.cohort', [])
           // on mouseleave zoom out
 
         // manually created json file. May be better suited in DB if additional cohorts added.  
-        d3.json('app/cohort/hrr8.json', function(error, root){
-          if(error){
-            console.log(error);
-          }
+        // d3.json('app/cohort/hrr8.json', function(error, root){
+        //   if(error){
+        //     console.log(error);
+        //   }
 
+          // var studentName = svg.selectAll('.studentName')
+          //   .data(root.bubbles)
+          //   .enter()
+          //   .append('g')
+          //   .attr('id', function(d, i){return 'mainName' + i;});
           var studentName = svg.selectAll('.studentName')
             .data(root.bubbles)
             .enter()

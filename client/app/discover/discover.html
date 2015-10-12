@@ -16,29 +16,38 @@
     </div>
       <input type="text" ng-model="searchFilter" class="search" placeholder="search">
     </div>
+
     <div class="container-fluid profile-view" ng-repeat="profile in profiles | filter:searchFilter">
       <div class="row info-basic">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <img ng-if="profile.avatar" src="{{profile.avatar}}" height="100" width="100"/>
           <img ng-show="!profile.avatar" src="http://i2.wp.com/reboot.pro/public/style_images/metro/profile/default_large.png" />
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-4">
           <p class="name">{{profile.name}}</p>
           <p class="company">{{profile.headline}}</p>
           <p ng-if="profile.city && profile.state" class="location">{{profile.city}}, {{profile.state}}</p>
      <!-- <p class="company">{{profile.currentemployer}}</p> -->
         </div>
+        <div class="col-sm-4">
+          <span class="social-icon"><a href="mailto:{{profile.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
+          <span ng-if="profile.githublogin" class="social-icon"><a href="http://github.com/{{profile.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
+          <span ng-if="profile.linkedin" class="social-icon"><a href="{{profile.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></span>
+          <span ng-if="profile.twitter" class="social-icon"><a href="https://www.twitter.com/{{profile.twitter}}"><i class="fa fa-twitter fa-3x"></i></a></span>
+        </div>
         <div class="col-sm-2">
           <p ng-if="profile.cohort" class="cohort">{{profile.cohort}}</p>
         </div>
       </div>
+
       <div class="row info-expanded">
         <div class="col-sm-5">
           <p><a href="mailto:{{profile.email}}">{{profile.email}}</a></p>
           <p ng-if="profile.website"><a href="{{profile.website}}" target="_blank">{{profile.website}}</a></p>
+          <!--
           <p ng-if="profile.github"><span class="field-title"></span><a href="https://www.github.com/{{profile.githublogin}}" target="_blank">Github</a></p>
           <p ng-if="profile.linkedin"><span class="field-title"></span><a href="{{profile.linkedin}}" target="_blank">Linkedin</a></p>
-          <p ng-if="profile.twitter"><span class="field-title"></span><a href="https://www.twitter.com/{{profile.twitter}}" target="_blank">Twitter</a></p>
+          <p ng-if="profile.twitter"><span class="field-title"></span><a href="https://www.twitter.com/{{profile.twitter}}" target="_blank">Twitter</a></p> -->
         </div>
         <div class="col-sm-7" ng-if="profile.githublogin">
           <div>Hack Reactor projects:</div>
@@ -64,16 +73,17 @@
       <div class="row info-contact" ng-if="!profile.githublogin">
         <div class="col-sm-9">
           <p class="field-title">Invite User:</p>
-          <!-- <div ng-if="!profile.signedUp"> -->
-            <p>This user has not signed up yet, send an invite!</p>
+            <p>This user has not signed up yet, send an email to invite them to join Jupitr!</p>
         </div>
-        <div  class="col-sm-3">  
+      </div>
+        
+        <!--<div  class="col-sm-3">  -->
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
               Send Invite
-            </button>
+            </button> -->
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -90,12 +100,12 @@
                     <button type="button" class="btn btn-primary">Send</button>
                   </div>
                   </form>
-                </div>
+                </div> 
               </div>
             </div>
 
-          <!-- </div>  -->
-        </div>
+          </div>  
+        </div>-->
       </div>
 <!--    <div class="row info-employment">
         <p class="employment-title">Employment History: </p>
