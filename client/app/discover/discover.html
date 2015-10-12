@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-4">
           <span class="social-icon"><a href="mailto:{{profile.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
-          <span class="social-icon"><a href="http://github.com/{{profile.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
+          <span ng-if="profile.githublogin" class="social-icon"><a href="http://github.com/{{profile.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
           <span ng-if="profile.linkedin" class="social-icon"><a href="{{profile.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></span>
           <span ng-if="profile.twitter" class="social-icon"><a href="https://www.twitter.com/{{profile.twitter}}"><i class="fa fa-twitter fa-3x"></i></a></span>
         </div>
@@ -70,14 +70,14 @@
           <p>{{profile.race}}</p>
         </div> -->
       </div>
-   <!--   <div class="row info-contact" ng-if="!profile.githublogin">
+      <div class="row info-contact" ng-if="!profile.githublogin">
         <div class="col-sm-9">
           <p class="field-title">Invite User:</p>
-           <div ng-if="!profile.signedUp">
-            <p>This user has not signed up yet, send an invite!</p>
+            <p>This user has not signed up yet, send an email to invite them to join Jupitr!</p>
         </div>
+      </div>
         
-        <div  class="col-sm-3">  -->
+        <!--<div  class="col-sm-3">  -->
             <!-- Button trigger modal -->
             <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
               Send Invite
