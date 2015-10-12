@@ -181,7 +181,7 @@ rect {
 
 #map {
   fill:none;
-  width: 0%;
+  width: 10%;
   height: 50%;
   float: left;
 }
@@ -194,8 +194,8 @@ rect {
 }*/
 
 #collapsedtree {
-  /*position: fixed;*/
-/*  top: 75px;
+/*  position: fixed;
+  top: 75px;
   left: 0px;*/
   width: 5%;
   float: left;
