@@ -115,7 +115,13 @@ exports.addLinkedinData = function(data, callback) {
   var linkedinData = {
     avatar: data.avatar,
     linkedin: data.linkedin,
-    headline: data.headline
+    headline: data.headline,
+    project1Name: data.project1Name,
+    project1Url: data.project1Url,
+    project2Name: data.project2Name,
+    project2Url: data.project2Url,
+    project3Name: data.project3Name,
+    project3Url: data.project3Url
     //hasGivenPermission: data.hasGivenPermission
   };
   User.findOneAndUpdate(query, linkedinData, {upsert: true}, function(err, profile) {

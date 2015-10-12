@@ -11,6 +11,7 @@ var passport = require('passport');
 var LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
 // var util = require('util');
+var linkedinscraper = require("linkedin-scraper");
 
 // not sure if necessary
 // var connect = require('connect');
@@ -149,11 +150,32 @@ app.get('/auth/linkedin/callback',
       linkedin: req.user._json.publicProfileUrl,
       // hasGivenPermission: true
     };
-    user.addLinkedinData(userData, function() {
+    //TODO
+    new linkedinscraper(userData.linkedin, function (linkedinObject) {
 
+      if(linkedinObject.projects) {
+        var projectsArray = linkedinObject.projects;
+        for(var i=0; i<projectsArray.length; i++) {
+          if(i===0){
+            userData['project1Name'] = projectsArray[i].name;
+            userData['project1Url'] = projectsArray[i].projectlink;
+          } else if(i===1){
+            userData['project2Name'] = projectsArray[i].name;
+            userData['project2Url'] = projectsArray[i].projectlink;
+          } else if(i===2){
+            userData['project3Name'] = projectsArray[i].name;
+            userData['project3Url'] = projectsArray[i].projectlink;
+          }
+        }
+      }
+
+      user.addLinkedinData(userData, function() {
+      });
+
+      res.redirect('/#/profile');
     });
-    
-    res.redirect('/#/profile');
+
+
   });
 
 app.get('/logout', function(req, res){
