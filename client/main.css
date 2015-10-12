@@ -347,9 +347,15 @@ img {
 .basic-profile {
   text-align: center;
   margin: 50px;
+  border: 2px solid black;
 }
 
 .continue-profile {
   text-align: center;
   border: 2px solid black;
+}
+
+.social-icon {
+  margin-left: 10px;
+  margin-right: 10px;
 }
