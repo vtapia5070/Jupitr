@@ -7,6 +7,7 @@ var helpers = require('./utils/helpers');
 var user = require('../db/userController.js');
 var db = require('../db/config.js');
 
+
 var passport = require('passport');
 var LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
@@ -110,6 +111,7 @@ passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
+  // callbackURL: "OAuth 2.0 Authorized Redirect URLs:",
   // scope: ['r_emailaddress', 'r_basicprofile'],
   state: true,
   passReqToCallback: true

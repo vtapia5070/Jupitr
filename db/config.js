@@ -14,3 +14,14 @@ db.on('error', console.error.bind(console, 'Connection error: unable to establis
 db.on('diconnected', mongoose.connect);
 
 module.exports = db;
+
+module.exports = {
+  github: {
+    appId: '0d89f243fcd157e1907c',
+    appSecret: '651f673086cee00cedd98a4830c4c45bfd70014f'
+  },
+  linkedin: {
+    appId: '78nkitgng9t2p3',
+    appSecret: 'hGF4gZlBNghdXZS4'
+  }
+};
