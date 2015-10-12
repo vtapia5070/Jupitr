@@ -22,8 +22,8 @@ var app = express();
 var githubId, githubSecret;
 
 if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_SECRET) {
-  githubId = process.env.APP_ID;
-  githubSecret = process.env.APP_SECRET;
+  githubId = process.env.GITHUB_APP_ID;
+  githubSecret = process.env.GITHUB_APP_SECRET;
 } else {
   var config = require('./utils/config');
   githubId = config.github.appId;
