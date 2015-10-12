@@ -63,9 +63,10 @@ allUsers.forEach(function(user) {
     userStore[profile.cohort + profile.name] = profile;
     cohortCoords[user.cohort] = cohortCoords[user.cohort] || [];
     cohortCoords[user.cohort].push(profile);
+    // console.log(userStore);
   }
 });
-
+// console.log(userLocGen);
 d3.json('app/home/us.json', function(err, us) {
   if (err) {
     console.log(err);
@@ -333,15 +334,20 @@ d3.json('app/home/us.json', function(err, us) {
       return d[1];
     });
 
+  var userGenCirText = g.select('.userGen').selectAll('text');
+
   var userGenCir = g.select('#userGen').selectAll('circle');
   userGenCir.on('click', function() {
     console.log('I am being clicked');
+    // console.log(userGenCirText[0]['parentNode']['__data__'][1]);
+    console.log(userGenCirText);
     collapsedtree();
   });
 
 
 });
 
+ 
 
 
 
@@ -400,63 +406,45 @@ function getUserProfile(user) {
 //   collapsedtree();
 // });
 
-function collapsedtree() {
+function searchStorage(info, object) {
+  var obj;
+  for (var key in object) {
+    if (object[key] === info) {
+      obj = object[key];
+    }
+  }
+  return obj;
+}
 
-  var flare = {
-    "name": "San Francisco, CA",
+function getLocation(array) {
+
+}
+
+function Flare(object) {
+  var obj = {};
+  for (var key in object) {
+
+  obj = {
+    "name": object[key].location,
     "children": [{
-      "name": "Doug Shamoo",
+      "name": object[key].name,
       "children": [{
-        "name": "something@example.com"
+        "name": object[key].email
       }, {
-        "name": "Uber"
+        "name": object[key].company
       }, {
-        "name": "HRR8"
-      }, {
-        "name": "Greenfield",
-        "children": [{
-          "name": "Contextualize",
-          "url": "https://contextualize.herokuapp.com/"
-        }],
-        "url": "#/home"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Victoria Tapia",
-      "children": [{
-        "name": "something@example.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Rex Suter",
-      "children": [{
-        "name": "something@example.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }, {
-        "name": "Google",
-        "url": "https://www.google.com"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Verlon Smith",
-      "children": [{
-        "name": "vsmith3113@gmail.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }],
-      "url": "#/home"
-    }],
-    "url": "#home"
+        "name": object[key].cohort
+      }]
+    }]
   };
+  }
+  return obj;
+}
+
+
+function collapsedtree() {
+  var flare = Flare(userStore);
+  console.log(flare);
 
   var margin = {
       top: 30,
@@ -529,23 +517,23 @@ function collapsedtree() {
       .style("opacity", 1e-6);
 
     // Enter any new nodes at the parent's previous position.
-    // nodeEnter.append("rect")
-    //   .attr("y", -barHeight / 2)
-    //   .attr("height", barHeight)
-    //   .attr("width", barWidth)
-    //   .style("fill", color)
-    //   .on("click", click); 
-
-    nodeEnter.append("svg:a")
-      .attr("xlink:href", function(d) {
-        return d.url;
-      }) // <-- reading the new "url" property
-      .append("svg:rect")
+    nodeEnter.append("rect")
       .attr("y", -barHeight / 2)
       .attr("height", barHeight)
       .attr("width", barWidth)
       .style("fill", color)
-      .on("click", click);
+      .on("click", click); 
+
+    // nodeEnter.append("svg:a")
+    //   .attr("xlink:href", function(d) {
+    //     return d.url;
+    //   }) // <-- reading the new "url" property
+    //   .append("svg:rect")
+    //   .attr("y", -barHeight / 2)
+    //   .attr("height", barHeight)
+    //   .attr("width", barWidth)
+    //   .style("fill", color)
+    //   .on("click", click);
 
     nodeEnter.append("text")
       .attr("dy", 3.5)
