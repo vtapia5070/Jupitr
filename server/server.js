@@ -240,16 +240,16 @@ app.get('/auth/github/callback',
 // route to get every single user record in db; check if has already requested
 app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
-    if (!req.session.sendAllUsers) {
-      user.sendAllUsers(function(users){
-        console.log("user is ", users[0]);
-        req.session.sendAllUsers = true;
-        res.json(users);
-      });
-    }
-    else {
-      res.end();  
-    }
+    // if (!req.session.sendAllUsers) {
+    user.sendAllUsers(function(users){
+      console.log("user is ", users[0]);
+        // req.session.sendAllUsers = true;
+      res.json(users);
+    });
+    // }
+    // else {
+    //   res.end();  
+    // }
   });
 });
 
