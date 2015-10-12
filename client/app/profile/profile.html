@@ -237,17 +237,17 @@
         <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
           <label>
             Headline:
-            <input type="text" class="form-control" name="zip" maxlength="5" 
+            <input type="text" class="form-control" name="zip" maxlength="70" 
             ng-model="user.headline">
           </label>
           <label>
             Linkedin URL:
-            <input type="text" class="form-control" name="zip" maxlength="5" 
+            <input type="text" class="form-control" name="zip" maxlength="200" 
             ng-model="user.linkedin">
           </label>
           <label>
             Avatar URL:
-            <input type="text" class="form-control" name="zip" maxlength="5" 
+            <input type="text" class="form-control" name="zip" maxlength="200" 
             ng-model="user.avatar">
           </label>
           <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary" ng-disabled='profileForm.$invalid'>  

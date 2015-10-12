@@ -8,7 +8,9 @@ angular.module('jupitr.profile', [])
   $scope.update = function() {
     // combine school name (HR/HRRB) with cohort number
     // to send back to database as HR # or HRRB #
-    $scope.user.cohort = "HRR" + $scope.school.cohort;
+    if ($scope.school.cohort) {
+      $scope.user.cohort = "HRR" + $scope.school.cohort;
+    }
     // technologies are stored as an array in database.
     // loop through technology object and push key name
     // into technologies array.
