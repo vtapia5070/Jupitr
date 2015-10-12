@@ -254,6 +254,13 @@ text {
   padding-bottom: 12px;
 }
 
+
+.info-expanded, .info-contact {
+  border-top: 1px solid #B3B3B3;
+  padding-top: 14px;
+}
+
+
 .info-expanded, .info-employment {
   border-top: 1px solid #B3B3B3;
   padding-top: 14px;
@@ -324,3 +331,20 @@ path.link {
   color: #434343;
   margin-bottom: 4px;
 }
+
+.basic-profile {
+  text-align: center;
+  margin: 50px;
+  border: 2px solid black;
+}
+
+.continue-profile {
+  text-align: center;
+  border: 2px solid black;
+}
+
+.social-icon {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
