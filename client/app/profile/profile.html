@@ -20,6 +20,7 @@
       <p ng-if="user.headline">{{user.headline}}</p>
       <p ng-if="user.city">{{user.city}}, {{user.state}}</p>
       <div>
+        <span class="social-icon"><a href="mailto:{{user.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
         <span class="social-icon"><a href="http://github.com/{{user.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
         <span ng-if="user.linkedin" class="social-icon"><a href="{{user.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></p>
       </div>
@@ -34,13 +35,14 @@
         <div class="col-sm-2">
           <img ng-src="{{user.avatar}}" height="100" width="100"/>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-5">
           <p class="name">{{user.name}}</p>
           <p ng-if="user.headline" class="company">{{user.headline}}</p>
           <p ng-if="user.city && user.state" class="location">{{user.city}}, {{user.state}}</p>
      <!-- <p class="company">{{user.currentemployer}}</p> -->
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
+          <span class="social-icon"><a href="mailto:{{user.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
           <span class="social-icon"><a href="http://github.com/{{user.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
           <span ng-if="user.linkedin" class="social-icon"><a href="{{user.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></p>
         </div>
