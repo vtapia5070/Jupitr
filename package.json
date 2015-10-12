@@ -40,6 +40,7 @@
     "grunt-mongo-drop-task": "^0.1.0",
     "grunt-nodemon": "^0.4.0",
     "grunt-shell": "^1.1.2",
+    "linkedin-scraper": "^1.0.1",
     "mocha": "^2.3.3",
     "mongoose": "4.1.8",
     "octonode": "^0.7.1",
