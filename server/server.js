@@ -20,6 +20,7 @@ var linkedinId, linkedinSecret;
 var app = express();
 
 var githubId, githubSecret;
+var baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 
 if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_SECRET) {
   githubId = process.env.GITHUB_APP_ID;
@@ -110,7 +111,7 @@ var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
-  callbackURL: "http://localhost:3000/auth/linkedin/callback",
+  callbackURL: baseUrl + "/auth/linkedin/callback",
   // scope: ['r_emailaddress', 'r_basicprofile'],
   state: true,
   passReqToCallback: true
@@ -200,7 +201,7 @@ app.get('/logout', function(req, res){
 passport.use(new GitHubStrategy({
     clientID: githubId,
     clientSecret: githubSecret,
-    callbackURL: "http://localhost:3000/auth/github/callback",
+    callbackURL: baseUrl + "/auth/github/callback",
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
