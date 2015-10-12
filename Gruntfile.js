@@ -92,7 +92,11 @@ module.exports = function(grunt) {
       seeddb: {
         command: 'node db/seed-data.js 50'
       },
-      
+
+      seedPrezi: {
+        command: 'node db/seed-presentation.js'
+      },
+
       // rebases from upstream staging
       rebase: {
         command: 'git pull --rebase upstream staging'
@@ -156,7 +160,11 @@ module.exports = function(grunt) {
   grunt.registerTask('seeddb', [
     'shell:seeddb'
   ]);
-  
+
+  // use actual HR records
+  grunt.registerTask('seedPrezi', [
+    'shell:seedPrezi'
+  ])
   // drops jupiter database
   grunt.registerTask('dropdb', [
     'mongo-drop'
