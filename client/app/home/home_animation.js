@@ -324,6 +324,7 @@ d3.json('app/home/us.json', function(err, us) {
     .attr('stroke-width', 0.35);
 
   divs.append('text')
+    .attr('class', 'locText')
     .attr('x', function(d) {
       return states(d[0])[0];
     })
@@ -334,20 +335,24 @@ d3.json('app/home/us.json', function(err, us) {
       return d[1];
     });
 
-  var userGenCirText = g.select('.userGen').selectAll('text');
-
+  
   var userGenCir = g.select('#userGen').selectAll('circle');
   userGenCir.on('click', function() {
     console.log('I am being clicked');
     // console.log(userGenCirText[0]['parentNode']['__data__'][1]);
-    console.log(userGenCirText);
+    // var collapsedtreeRemove = d3.select('#collapsedtree').selectAll('g');
+    
     collapsedtree();
+    // collapsedtreeRemove.remove();
   });
+  // .on('click', function() {
+  // var collapsedtreeRemove = d3.select('#collapsedtree').selectAll('g');
+  // collapsedtreeRemove.remove();
+  // });
 
 
 });
 
- 
 
 
 
