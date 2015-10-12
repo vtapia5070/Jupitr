@@ -8,7 +8,7 @@ angular.module('jupitr.profile', [])
   $scope.update = function() {
     // combine school name (HR/HRRB) with cohort number
     // to send back to database as HR # or HRRB #
-    $scope.user.cohort = $scope.school.name + " " + $scope.school.cohort;
+    $scope.user.cohort = "HRR" + $scope.school.cohort;
     // technologies are stored as an array in database.
     // loop through technology object and push key name
     // into technologies array.
@@ -45,7 +45,7 @@ angular.module('jupitr.profile', [])
     // then refresh page
     User.update($scope.user)
       .then(function() {
-        $window.location.reload();
+        $scope.init();      
       })
       .catch(function(error) {
         console.log(error);
@@ -54,15 +54,7 @@ angular.module('jupitr.profile', [])
 
   $scope.updateProfileAndNextStep = function() {
     $scope.user.currentProfileStep = $scope.user.currentProfileStep + 1;
-    User.update($scope.user)
-      .then(function() {
-        console.log('scope.user:', $scope.user);
-        console.log('step:', $scope.user.currentProfileStep);
-        $scope.init();      
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    $scope.update();
   };
 
   $scope.init = function() {
