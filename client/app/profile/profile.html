@@ -11,26 +11,7 @@
 
 <div ng-controller="profileController" id="profile">
 
-  <!-- Profile (always shown and updated) -->
-  <div class="container-fluid">
-    <div class="basic-profile">
-      <img ng-src="{{user.avatar}}">
-      <p>{{user.name}}</p>
-      <p>{{user.email}}</p>
-      <p ng-if="user.headline">{{user.headline}}</p>
-      <p ng-if="user.city">{{user.city}}, {{user.state}}</p>
-      <div>
-        <span class="social-icon"><a href="mailto:{{user.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
-        <span class="social-icon"><a href="http://github.com/{{user.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
-        <span ng-if="user.linkedin" class="social-icon"><a href="{{user.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></p>
-      </div>
-      <!-- <a class="btn btn-social btn-vimeo" ng-click="updateProfileAndNextStep()" role="button">
-        <i class="fa fa-user"></i>
-        Complete your Profile</a> -->
-    </div>
-  </div>
-
-  <div class="container-fluid profile-view">
+  <div class="container-fluid profile-view edit">
       <div class="row info-basic">
         <div class="col-sm-2">
           <img ng-src="{{user.avatar}}" height="100" width="100"/>
@@ -45,40 +26,25 @@
           <span class="social-icon"><a href="mailto:{{user.email}}"><i class="fa fa-envelope fa-3x"></i></a></span>
           <span class="social-icon"><a href="http://github.com/{{user.githublogin}}"><i class="fa fa-github fa-3x"></i></a></span>
           <span ng-if="user.linkedin" class="social-icon"><a href="{{user.linkedin}}"><i class="fa fa-linkedin fa-3x"></i></a></p>
+          <span ng-if="user.twitter" class="social-icon"><a href="https://www.twitter.com/{{user.twitter}}"><i class="fa fa-twitter fa-3x"></i></a></p>
         </div>
         <div class="col-sm-1">
           <p ng-if="user.cohort" class="cohort">{{user.cohort}}</p>
-          <p class="gender">{{user.gender}}</p>
         </div>
       </div>
       <div class="row info-expanded">
         <div class="col-sm-5">
-          <p><a href="mailto:{{user.email}}">{{user.email}}</a></p>
-          <p ng-if="user.website"><a href="{{user.website}}" target="_blank">{{user.website}}</a></p>
-          <p ng-if="user.github"><span class="field-title"></span><a href="https://www.github.com/{{user.githublogin}}" target="_blank">Github</a></p>
-          <p ng-if="user.linkedin"><span class="field-title"></span><a href="{{user.linkedin}}" target="_blank">Linkedin</a></p>
-          <p ng-if="user.twitter"><span class="field-title"></span><a href="https://www.twitter.com/{{user.twitter}}" target="_blank">Twitter</a></p>
+          <p>Email: {{user.email}}</p>
+          <p ng-if="user.website">Website: <a href="{{user.website}}" target="_blank">{{user.website}}</a></p>
         </div>
         <div class="col-sm-7" ng-if="user.githublogin">
-          <div>Hack Reactor projects:</div>
-          <div ng-if="!user.thesis && !user.legacy && !user.greenfield">
+          <div>Projects:</div>
+          <div ng-if="!user.project1Name && !user.project2Name && !user.project3Name">
           No projects added yet!</div>
-          <p ng-if="user.thesis"><span class="field-title">Thesis:  </span><a href="{{user.thesisurl}}" target="_blank">{{user.thesis}}</a></p>
-          <p ng-if="user.legacy"><span class="field-title">Legacy:  </span>{{user.legacy}}</p>
-          <p ng-if="user.greenfield"><span class="field-title">Greenfield:  </span>{{user.greenfield}}</p>
+          <p ng-if="user.project1Name"><span class="field-title">{{user.project1Name}}: </span><a href="{{user.project1Url}}" target="_blank">{{user.project1Url}}</a></p>
+          <p ng-if="user.project2Name"><span class="field-title">{{user.project2Name}}: </span><a href="{{user.project2Url}}" target="_blank">{{user.project2Url}}</a></p>
+          <p ng-if="user.project3Name"><span class="field-title">{{user.project3Name}}: </span><a href="{{user.project3Url}}" target="_blank">{{user.project3Url}}</a></p>
         </div>
-<!--    <div class="col-sm-3">
-          <p class="field-title">Technologies:</p>
-          <div class="technologies" ng-repeat="technology in user.technologies track by $index">
-            <p>{{technology}}</p>
-          </div> 
-        </div>
--->
-       <!--  <div class="col-sm-3">
-          <p class="field-title">Demographics:</p>
-          <p>{{user.gender}}</p>
-          <p>{{user.race}}</p>
-        </div> -->
       </div>
       <div class="row info-contact" ng-if="!user.githublogin">
         <div class="col-sm-9">
@@ -116,46 +82,15 @@
           <!-- </div>  -->
         </div>
       </div>
-<!--    <div class="row info-employment">
-        <p class="employment-title">Employment History: </p>
-        <div class="col-sm-3">
-          <p>{{user.currentemployer}}</p>
-          <p>{{user.currentemployerrole}}</p>
-          <p>{{user.currentemployertype}}</p>
-          <p><span class="field-title">Start:  </span>{{user.currentemployerstartdate.split(' ')[1]}} {{user.currentemployerstartdate.split(' ')[3]}}</p>
-        </div>
-        <div class="col-sm-3">
-          <p>{{user.prioremployer1}}</p>
-          <p>{{user.prioremployer1role}}</p>
-          <p>{{user.prioremployer1type}}</p>
-          <p><span class="field-title">Start:  </span>{{user.prioremployer1startdate.split(' ')[1]}} {{user.prioremployer1startdate.split(' ')[3]}}</p>
-          <p><span class="field-title">End:  </span>{{user.prioremployer1enddate.split(' ')[1]}} {{user.prioremployer1enddate.split(' ')[3]}}</p>
-        </div>
-        <div class="col-sm-3">
-          <p>{{user.prioremployer2}}</p>
-          <p>{{user.prioremployer2role}}</p>
-          <p>{{user.prioremployer2type}}</p>
-          <p><span class="field-title">Start:  </span>{{user.prioremployer2startdate.split(' ')[1]}} {{user.prioremployer2startdate.split(' ')[3]}}</p>
-          <p><span class="field-title">End:  </span>{{user.prioremployer2enddate.split(' ')[1]}} {{user.prioremployer2enddate.split(' ')[3]}}</p>
-        </div>
-        <div class="col-sm-3">
-          <p>{{user.prioremployer3}}</p>
-          <p>{{user.prioremployer3role}}</p>
-          <p>{{user.prioremployer3type}}</p>
-          <p><span class="field-title">Start:  </span>{{user.prioremployer3startdate.split(' ')[1]}} {{user.prioremployer3startdate.split(' ')[3]}}</p>
-          <p><span class="field-title">End:  </span>{{user.prioremployer3enddate.split(' ')[1]}} {{user.prioremployer3enddate.split(' ')[3]}}</p>
-        </div>
-
-      </div>
--->
     </div>
 
   <div ng-switch on="user.currentProfileStep">
+    <h1 ng-if="user.currentProfileStep < 2" class="complete-profile-heading">Complete your profile</h1>
 
-    <!-- Step 0 -->
+    <!-- Step 1 -->
     <div class="container-fluid" ng-switch-when="0">
       <div class="continue-profile">
-        <h2>Step {{user.currentProfileStep + 1}}:</h2>
+        <h1 class="step-heading">Step {{user.currentProfileStep + 1}}:</h1>
         <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
           <label>
             Zipcode:
@@ -222,10 +157,10 @@
       </div>
     </div>
 
-    <!-- Step 1 -->
+    <!-- Step 2 -->
     <div class="container-fluid" ng-switch-when="1">
       <div class="continue-profile">
-        <h2>Step {{user.currentProfileStep + 1}}:</h2>
+        <h1 class="step-heading">Step {{user.currentProfileStep + 1}}:</h1>
 
         <div>
           <a class="btn btn-social btn-linkedin" href="/auth/linkedin" role="button" ng-click="updateProfileAndNextStep()">
@@ -239,365 +174,149 @@
         <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
           <label>
             Headline:
-            <input type="text" class="form-control" name="zip" maxlength="70" 
+            <input type="text" class="form-control" maxlength="70" 
             ng-model="user.headline">
           </label>
           <label>
             Linkedin URL:
-            <input type="text" class="form-control" name="zip" maxlength="200" 
+            <input type="text" class="form-control" maxlength="200" 
             ng-model="user.linkedin">
           </label>
           <label>
             Avatar URL:
-            <input type="text" class="form-control" name="zip" maxlength="200" 
+            <input type="text" class="form-control" maxlength="200" 
             ng-model="user.avatar">
           </label>
-          <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary" ng-disabled='profileForm.$invalid'>  
+
+          <div class="form-group">
+            <div class="form-group">            
+              <label>
+                Project 1:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project1Name">
+              </label>
+              <label>
+                URL:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project1Url">
+              </label>
+            </div>
+            <div class="form-group">            
+              <label>
+                Project 2:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project2Name">
+              </label>
+              <label>
+                URL:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project2Url">
+              </label>
+            </div>
+            <div class="form-group">            
+              <label>
+                Project 3:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project3Name">
+              </label>
+              <label>
+                URL:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.project3Url">
+              </label>
+            </div>
+            <div class="form-group">            
+              <label>
+                Website:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.website">
+              </label>
+              <label>
+                Twitter:
+                <input type="text" class="form-control" maxlength="200" 
+                ng-model="user.twitter">
+              </label>
+            </div>
+          </div>
+          <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary">  
         </form>
       </div>
     </div>
 
   </div>
+  <div ng-if="user.currentProfileStep >= 2" class="container-fluid">
+    <div class="continue-profile">
+      <h1 class="step-heading">Edit Profile:</h1>
+      <form name="profileForm" ng-submit='updateProfileAndNextStep()' novalidate>
+        <label>
+          Headline:
+          <input type="text" class="form-control" maxlength="70" 
+          ng-model="user.headline">
+        </label>
+        <label>
+          Linkedin URL:
+          <input type="text" class="form-control" maxlength="200" 
+          ng-model="user.linkedin">
+        </label>
+        <label>
+          Avatar URL:
+          <input type="text" class="form-control" maxlength="200" 
+          ng-model="user.avatar">
+        </label>
+        <div class="form-group">
+          <div class="form-group">            
+            <label>
+              Project 1:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project1Name">
+            </label>
+            <label>
+              URL:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project1Url">
+            </label>
+          </div>
+          <div class="form-group">            
+            <label>
+              Project 2:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project2Name">
+            </label>
+            <label>
+              URL:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project2Url">
+            </label>
+          </div>
+          <div class="form-group">            
+            <label>
+              Project 3:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project3Name">
+            </label>
+            <label>
+              URL:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.project3Url">
+            </label>
+          </div>
+          <div class="form-group">            
+            <label>
+              Website:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.website">
+            </label>
+            <label>
+              Twitter:
+              <input type="text" class="form-control" maxlength="200" 
+              ng-model="user.twitter">
+            </label>
+          </div>
+        </div>
+        <input type="submit" ng-click="updateProfileAndNextStep()" value="Continue" class="btn btn-primary">  
+      </form>
+    </div>
 
+  </div>
 
-
-  <!-- <form name="profileForm" ng-submit='updateProfile()' novalidate>
-    <fieldset class="contact">
-      <legend>
-        Contact&nbsp;Information&nbsp;and&nbsp;Personal&nbsp;Details
-      </legend>
-      <label>
-        Name: 
-        <input type="text" class="form-control" name="name" maxlength="100" 
-        ng-model="user.name" required>
-      </label>
-      <label>
-        Github&nbsp;Login: 
-        <input type="text" class="form-control" name="githublogin" maxlength="100" 
-        ng-model="user.githublogin" required>
-      </label>
-      <label>
-        Email:
-        <input type="email" class="form-control" name="email" maxlength="100" 
-        ng-model="user.email" required>
-      </label>
-      <label>
-        City: 
-        <input type="text" class="form-control" name="city" maxlength="100" 
-        ng-model="user.city" required>
-      </label>
-      <label>
-        State: 
-        <input type="text" class="form-control" name="state" maxlength="100" 
-        ng-model="user.state" required>
-      </label>
-      <label>
-        Zipcode:
-        <input type="text" class="form-control" name="zip" maxlength="5" 
-        ng-model="user.zip" required>
-      </label>
-      <label>
-        School:<br>   
-        <input type="radio" name="HR" ng-model="school.name" value="HR" required>Hack Reactor, San Francisco
-        <input type="radio" name="HRRB" ng-model="school.name" value="HRRB" required>Hack Reactor, Remote Beta
-      </label>
-      <label>
-        Cohort: 
-         <select name="cohort" ng-model="school.cohort" class="form-control" required>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-          <option value="19">19</option>
-          <option value="20">20</option>
-          <option value="21">21</option>
-          <option value="22">22</option>
-          <option value="23">23</option>
-          <option value="24">24</option>
-          <option value="25">25</option>
-          <option value="26">26</option>
-          <option value="27">27</option>
-          <option value="28">28</option>
-          <option value="29">29</option>
-          <option value="30">30</option>
-          <option value="31">31</option>
-          <option value="32">32</option>
-          <option value="33">33</option>
-          <option value="34">34</option>
-          <option value="35">35</option>
-          <option value="36">36</option>
-          <option value="37">37</option>
-          <option value="38">38</option>
-          <option value="39">39</option>
-          <option value="40">40</option>
-          <option value="41">41</option>
-          <option value="42">42</option>
-          <option value="43">43</option>
-          <option value="44">44</option>
-          <option value="45">45</option>
-          <option value="46">46</option>
-          <option value="47">47</option>
-          <option value="48">48</option>
-          <option value="49">49</option>
-          <option value="50">50</option>
-        </select>
-      </label>
-      <label>
-        Gender:
-        <select name="gender" ng-model="user.gender" class="form-control">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-      </label>
-      <label>
-        Ethnicity:
-        <select name="race" ng-model="user.race" class="form-control">
-          <option value="Asian">Asian</option>
-          <option value="Black/African-American">Black or African American</option>
-          <option value="Hispanic">Hispanic or Latino</option>
-          <option value="Native American">Native American or Alaska Native</option>
-          <option value="Middle Eastern">Middle Eastern</option>
-          <option value="Caucasion/White">White</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-    </fieldset>
-
-    <fieldset class="career">
-      <legend>
-        Career&nbsp;Information
-      </legend>
-      <label>
-        Current&nbsp;Employer:
-        <input type="text" class="form-control" name="currentemployer" maxlength="100" 
-        ng-model="user.currentemployer">
-      </label>
-      <label>
-        Job Type:
-        <select name="currentemployertype" ng-model="user.currentemployertype" class="form-control">
-          <option value="onsite">Onsite</option>
-          <option value="remote">Remote</option>
-          <option value="freelance">Freelance</option>
-          <option value="contract">Contract</option>
-        </select>
-      </label>
-      <label>
-        Current&nbsp;Job&nbsp;Title/Role:
-        <input type="text" class="form-control" name="currentemployerrole" maxlength="100" 
-        ng-model="user.currentemployerrole">
-      </label>
-      <label>
-        Start&nbsp;Date:
-        <input type="date" name="currentemployerstartdate" maxlength="100" class="form-control" 
-        ng-model="date.currentemployerstartdate">
-      </label>
-      <label>
-        Previous&nbsp;Employer&nbsp;1:
-        <input type="text" class="form-control" name="prioremployer1" 
-        ng-model="user.prioremployer1">
-      </label>
-      <label>
-        Job&nbsp;Type:
-        <select name="prioremployer1type" ng-model="user.prioremployer1type" class="form-control" >
-          <option value="onsite">Onsite</option>
-          <option value="remote">Remote</option>
-          <option value="freelance">Freelance</option>
-          <option value="contract">Contract</option>
-        </select>
-      </label>
-      <label>
-        Job&nbsp;Title/Role:
-        <input type="text" class="form-control" name="prioremployer1role" maxlength="100" 
-        ng-model="user.prioremployer1role">
-      </label>
-      <label>
-        Start&nbsp;Date:
-        <input type="date" name="prioremployer1startdate" maxlength="100" class="form-control" 
-        ng-model="date.prioremployer1startdate">
-      </label>
-      <label>
-        End&nbsp;Date:
-        <input type="date" name="prioremployer1enddate" maxlength="100" class="form-control"
-        ng-model="date.prioremployer1enddate"> 
-      </label>
-      <label>
-        Previous&nbsp;Employer&nbsp;2:
-        <input type="text" class="form-control" name="prioremployer2" 
-        ng-model="user.prioremployer2">
-      </label>
-      <label>
-        Job&nbsp;Type:
-        <select name="prioremployer2type" ng-model="user.prioremployer2type" class="form-control">
-          <option value="onsite">Onsite</option>
-          <option value="remote">Remote</option>
-          <option value="freelance">Freelance</option>
-          <option value="contract">Contract</option>
-        </select>
-      </label>
-      <label>
-        Job&nbsp;Title/Role:
-        <input type="text" class="form-control" name="prioremployer2role" maxlength="100" 
-        ng-model="user.prioremployer2role">
-      </label>
-      <label>
-        Start&nbsp;Date:
-        <input type="date" name="prioremployer2startdate" maxlength="100" class="form-control" 
-        ng-model="date.prioremployer2startdate">
-      </label>
-      <label>
-        End&nbsp;Date:
-        <input type="date" name="prioremployer2enddate" maxlength="100" class="form-control" 
-        ng-model="date.prioremployer2enddate"> 
-      </label>
-      <label>
-        Previous&nbsp;Employer&nbsp;3:
-        <input type="text" class="form-control" name="prioremployer3" 
-        ng-model="user.prioremployer3">
-      </label>
-      <label>
-        Job&nbsp;Type:
-        <select name="prioremployer3type" ng-model="user.prioremployer3type" class="form-control">
-          <option value="onsite">Onsite</option>
-          <option value="remote">Remote</option>
-          <option value="freelance">Freelance</option>
-          <option value="contract">Contract</option>
-        </select>
-      </label>
-      <label>
-        Job&nbsp;Title/Role:
-        <input type="text" class="form-control" name="prioremployer3role" maxlength="100" 
-        ng-model="user.prioremployer3role">
-      </label>
-      <label>
-        Start&nbsp;Date:
-        <input type="date" name="prioremployer3startdate" maxlength="100" class="form-control" 
-        ng-model="date.prioremployer3startdate">
-      </label>
-      <label>
-        End&nbsp;Date:
-        <input type="date" name="prioremployer3enddate" maxlength="100" class="form-control" 
-        ng-model="date.prioremployer3enddate"> 
-      </label>
-      <label>
-        Twitter:
-        <input type="text" class="form-control" name="twitter" maxlength="100" 
-        ng-model="user.twitter">
-      </label>
-      <label>
-        Website:
-        <input type="url" name="website" maxlength="100" class="form-control" 
-        ng-model="user.website">  
-      </label>
-      <label>
-        Thesis:
-        <input type="text" class="form-control" name="thesis" maxlength="100" 
-        ng-model="user.thesis">
-      </label>
-      <label>
-        Thesis&nbsp;URL:
-        <input type="url" name="thesisurl" maxlength="100" class="form-control" 
-        ng-model="user.thesisurl">
-      </label>
-      <label>
-        Greenfield:
-        <input type="text" class="form-control" name="greenfield" maxlength="100" 
-        ng-model="user.greenfield">
-      </label>
-      <label>
-        Legacy&nbsp;Project:
-        <input type="text" class="form-control" name="legacy" maxlength="100" 
-        ng-model="user.legacy">
-      </label>
-    </fieldset>
-    <fieldset> 
-      <legend>       
-        Technologies:
-      </legend>
-      <label>
-        <input type="checkbox" name="Android" ng-model="technology.Android" value="Android">Android
-      </label>
-      <label>
-        <input type="checkbox" name="Angular" ng-model="technology.Angular" value="Angular">Angular
-      </label>
-      <label>
-        <input type="checkbox" name="Backbone" ng-model="technology.Backbone" value="Backbone">Backbone
-      </label>
-      <label>
-        <input type="checkbox" name="C/C++" ng-model="technology['C/C++']" value="C/C++">C/C++
-      </label>
-      <label>
-        <input type="checkbox" name="CSS" ng-model="technology.CSS" value="CSS">CSS
-      </label>
-      <label>
-        <input type="checkbox" name="D3" ng-model="technology.D3" value="D3">D3
-      </label>
-      <label>
-        <input type="checkbox" name="Go" ng-model="technology.Go" value="Go">Go
-      </label>
-      <label>
-        <input type="checkbox" name="Express" ng-model="technology.Express" value="Express">Express
-      </label>
-      <label>
-        <input type="checkbox" name="HTML" ng-model="technology.HTML" value="HTML">HTML
-      </label>
-      <label>
-        <input type="checkbox" name="iOS" ng-model="technology.iOS" value="iOS">iOS
-      </label>
-      <label>
-        <input type="checkbox" name="Java" ng-model="technology.Java" value="Java">Java
-      </label>
-      <label>
-        <input type="checkbox" name="JavaScript" ng-model="technology.JavaScript" value="JavaScript">JavaScript
-      </label>
-      <label>
-        <input type="checkbox" name="Jquery" ng-model="technology.Jquery" value="Jquery">Jquery
-      </label>
-      <label>
-        <input type="checkbox" name="MongoDB" ng-model="technology.MongoDB" value="MongoDB">MongoDB
-      </label>
-      <label>
-        <input type="checkbox" name="Node" ng-model="technology.Node" value="Node">Node
-      </label>
-      <label>
-        <input type="checkbox" name="Pearl" ng-model="technology.Pearl" value="Pearl">Pearl
-      </label>
-      <label>
-        <input type="checkbox" name="PHP" ng-model="technology.PHP" value="PHP">PHP
-      </label>
-      <label>
-        <input type="checkbox" name="Rails" ng-model="technology.Rails" value="Rails">Rails
-      </label>
-      <label>
-        <input type="checkbox" name="React" ng-model="technology.React" value="React">React
-      </label>
-      <label>
-        <input type="checkbox" name="Ruby" ng-model="technology.Ruby" value="Ruby">Ruby
-      </label>
-      <label>
-        <input type="checkbox" name="Rust" ng-model="technology.Rust" value="Rust">Rust          
-      </label>
-      <label>
-        <input type="checkbox" name="SQL" ng-model="technology.SQL" value="SQL">SQL
-      </label>
-      <label>
-        <input type="checkbox" name="Unix" ng-model="technology.Unix" value="Unix">Unix          
-      </label>        
-    </fieldset>
-    <input type="submit" ng-click="update()" value="Save Profile" class="btn btn-primary" ng-disabled='profileForm.$invalid'>          
-  </form> -->
 </div>

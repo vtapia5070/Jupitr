@@ -14,35 +14,35 @@ angular.module('jupitr.profile', [])
     // technologies are stored as an array in database.
     // loop through technology object and push key name
     // into technologies array.
-    $scope.user.technologies = [];
-    for (var prop in $scope.technology) {
-      if ($scope.technology[prop] === true) {
-        $scope.user.technologies.push(prop);
-      }      
-    }
+    // $scope.user.technologies = [];
+    // for (var prop in $scope.technology) {
+    //   if ($scope.technology[prop] === true) {
+    //     $scope.user.technologies.push(prop);
+    //   }      
+    // }
     // convert dates back to strings.
     // in future, should be changed so dates on user obj only update when inputs change.
-    if ($scope.date.currentemployerstartdate) {
-      $scope.user.currentemployerstartdate = String($scope.date.currentemployerstartdate);
-    }
-    if ($scope.date.prioremployer1startdate) {
-      $scope.user.prioremployer1startdate = String($scope.date.prioremployer1startdate);
-    }
-    if ($scope.date.prioremployer1enddate) {
-      $scope.user.prioremployer1enddate = String($scope.date.prioremployer1enddate);
-    }
-    if ($scope.date.prioremployer2startdate) {
-      $scope.user.prioremployer2startdate = String($scope.date.prioremployer2startdate);
-    }
-    if ($scope.date.prioremployer2enddate) {
-      $scope.user.prioremployer2enddate = String($scope.date.prioremployer2enddate);
-    }
-    if ($scope.date.prioremployer3startdate) {
-      $scope.user.prioremployer3startdate = String($scope.date.prioremployer3startdate);
-    }
-    if ($scope.date.prioremployer3enddate) {
-      $scope.user.prioremployer3enddate = String($scope.date.prioremployer3enddate);
-    } 
+    // if ($scope.date.currentemployerstartdate) {
+    //   $scope.user.currentemployerstartdate = String($scope.date.currentemployerstartdate);
+    // }
+    // if ($scope.date.prioremployer1startdate) {
+    //   $scope.user.prioremployer1startdate = String($scope.date.prioremployer1startdate);
+    // }
+    // if ($scope.date.prioremployer1enddate) {
+    //   $scope.user.prioremployer1enddate = String($scope.date.prioremployer1enddate);
+    // }
+    // if ($scope.date.prioremployer2startdate) {
+    //   $scope.user.prioremployer2startdate = String($scope.date.prioremployer2startdate);
+    // }
+    // if ($scope.date.prioremployer2enddate) {
+    //   $scope.user.prioremployer2enddate = String($scope.date.prioremployer2enddate);
+    // }
+    // if ($scope.date.prioremployer3startdate) {
+    //   $scope.user.prioremployer3startdate = String($scope.date.prioremployer3startdate);
+    // }
+    // if ($scope.date.prioremployer3enddate) {
+    //   $scope.user.prioremployer3enddate = String($scope.date.prioremployer3enddate);
+    // } 
     // Update using User factory (see services.js) with updated user profile, 
     // then refresh page
     User.update($scope.user)
