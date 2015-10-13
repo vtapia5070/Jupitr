@@ -51,11 +51,11 @@
         </div>
         <div class="col-sm-7" ng-if="profile.githublogin">
           <div>Hack Reactor projects:</div>
-          <div ng-if="!profile.thesis && !profile.legacy && !profile.greenfield">
+          <div ng-if="!profile.project1Name && !profile.project2Name && !profile.project3Name">
           No projects added yet!</div>
-          <p ng-if="profile.thesis"><span class="field-title">Thesis:  </span><a href="{{profile.thesisurl}}" target="_blank">{{profile.thesis}}</a></p>
-          <p ng-if="profile.legacy"><span class="field-title">Legacy:  </span>{{profile.legacy}}</p>
-          <p ng-if="profile.greenfield"><span class="field-title">Greenfield:  </span>{{profile.greenfield}}</p>
+          <p ng-if="profile.project1Name"><span class="field-title">{{profile.project1Name}}: </span><a href="{{profile.thesisurl}}" target="_blank">{{profile.project1Url}}</a></p>
+          <p ng-if="profile.project2Name"><span class="field-title">{{profile.project2Name}}:  </span>{{profile.project2Url}}</p>
+          <p ng-if="profile.project3Name"><span class="field-title">{{profile.project3Name}}:  </span>{{profile.project3Url}}</p>
         </div>
 <!--    <div class="col-sm-3">
           <p class="field-title">Technologies:</p>
