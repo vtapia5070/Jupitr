@@ -621,17 +621,6 @@ function collapsedtree() {
     //   .style("fill", color)
     //   .on("click", click);
 
-    // nodeEnter.append("svg:a")
-    //   .attr("xlink:href", function(d) {
-    //     return d.url;
-    //   }) // <-- reading the new "url" property
-    //   .append("svg:rect")
-    //   .attr("y", -barHeight / 2)
-    //   .attr("height", barHeight)
-    //   .attr("width", barWidth)
-    //   .style("fill", color)
-    //   .on("click", click);
-
     nodeEnter.append("text")
       .attr("dy", 3.5)
       .attr("dx", 5.5)
