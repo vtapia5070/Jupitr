@@ -19,6 +19,12 @@ var userSchema = new mongoose.Schema({
   hasGivenPermission: Boolean, // testing/seed-data
   website: String,
   gender: String,
+  project1Name: String,
+  project2Name: String,
+  project3Name: String,
+  project1Url: String,
+  project2Url: String,
+  project3Url: String,
   // race: String,
   // currentemployer: String,
   // currentemployerrole: String,
@@ -39,12 +45,12 @@ var userSchema = new mongoose.Schema({
   // prioremployer3type: String,
   // prioremployer3startdate: String,
   // prioremployer3enddate: String,
-  greenfield: String,
-  greenfieldurl: String,
-  legacy: String,
-  legacyurl: String,
-  thesis: String,
-  thesisurl: String
+  // greenfield: String,
+  // greenfieldurl: String,
+  // legacy: String,
+  // legacyurl: String,
+  // thesis: String,
+  // thesisurl: String
   // technologies: Array,
 });
 

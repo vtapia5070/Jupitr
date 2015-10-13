@@ -12,6 +12,7 @@ var passport = require('passport');
 var LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
 // var util = require('util');
+var linkedinscraper = require("linkedin-scraper");
 
 // not sure if necessary
 // var connect = require('connect');
@@ -20,10 +21,11 @@ var linkedinId, linkedinSecret;
 var app = express();
 
 var githubId, githubSecret;
+var baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 
 if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_SECRET) {
-  githubId = process.env.APP_ID;
-  githubSecret = process.env.APP_SECRET;
+  githubId = process.env.GITHUB_APP_ID;
+  githubSecret = process.env.GITHUB_APP_SECRET;
 } else {
   var config = require('./utils/config');
   githubId = config.github.appId;
@@ -110,8 +112,10 @@ var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 passport.use(new LinkedInStrategy({
   clientID: linkedinId,
   clientSecret: linkedinSecret,
+
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
   // callbackURL: "OAuth 2.0 Authorized Redirect URLs:",
+
   // scope: ['r_emailaddress', 'r_basicprofile'],
   state: true,
   passReqToCallback: true
@@ -151,11 +155,32 @@ app.get('/auth/linkedin/callback',
       linkedin: req.user._json.publicProfileUrl,
       // hasGivenPermission: true
     };
-    user.addLinkedinData(userData, function() {
+    //TODO
+    new linkedinscraper(userData.linkedin, function (linkedinObject) {
 
+      if(linkedinObject.projects) {
+        var projectsArray = linkedinObject.projects;
+        for(var i=0; i<projectsArray.length; i++) {
+          if(i===0){
+            userData['project1Name'] = projectsArray[i].name;
+            userData['project1Url'] = projectsArray[i].projectlink;
+          } else if(i===1){
+            userData['project2Name'] = projectsArray[i].name;
+            userData['project2Url'] = projectsArray[i].projectlink;
+          } else if(i===2){
+            userData['project3Name'] = projectsArray[i].name;
+            userData['project3Url'] = projectsArray[i].projectlink;
+          }
+        }
+      }
+
+      user.addLinkedinData(userData, function() {
+      });
+
+      res.redirect('/#/profile');
     });
-    
-    res.redirect('/#/profile');
+
+
   });
 
 app.get('/logout', function(req, res){
@@ -180,7 +205,7 @@ app.get('/logout', function(req, res){
 passport.use(new GitHubStrategy({
     clientID: githubId,
     clientSecret: githubSecret,
-    callbackURL: "http://localhost:3000/auth/github/callback",
+    callbackURL: baseUrl + "/auth/github/callback",
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {

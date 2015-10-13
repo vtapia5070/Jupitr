@@ -302,7 +302,6 @@ path.link {
   color: black;
   padding-bottom: 2px;
   line-height: 40px;
-}
 
 .location {
   font-size: 20px;
@@ -341,11 +340,35 @@ path.link {
 
 .continue-profile {
   text-align: center;
-  border: 2px solid black;
+  border: 2px solid darkgreen;
+  border-radius: 3px;
 }
 
 .social-icon {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.edit {
+  margin: 50px;
+}
+.complete-profile-heading {
+  text-align: center;
+}
+.step-heading {
+  text-align: left;
+  margin: 15px;
+}
+
+.team {
+  text-align: center;
+  font-family: Courier;
+  font-size: 30px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.cohortVis {
+  height: auto;
 }
 
