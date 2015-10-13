@@ -37,6 +37,7 @@ var map = d3.geo.path()
 // stores generalized location count
 // format: {'[x, y]': 24, '[x2, y2]': 2, ...}
 var locStoreGen = {};
+var cityLocation;
 // stores generalized location coords
 // format: [[x, y], [x2, y2], ...]
 var userLocGen = [];
@@ -63,9 +64,10 @@ allUsers.forEach(function(user) {
     userStore[profile.cohort + profile.name] = profile;
     cohortCoords[user.cohort] = cohortCoords[user.cohort] || [];
     cohortCoords[user.cohort].push(profile);
+    // console.log(userStore);
   }
 });
-
+// console.log(userLocGen);
 d3.json('app/home/us.json', function(err, us) {
   if (err) {
     console.log(err);
@@ -323,6 +325,7 @@ d3.json('app/home/us.json', function(err, us) {
     .attr('stroke-width', 0.35);
 
   divs.append('text')
+    .attr('class', 'locText')
     .attr('x', function(d) {
       return states(d[0])[0];
     })
@@ -330,14 +333,29 @@ d3.json('app/home/us.json', function(err, us) {
       return states(d[0])[1];
     })
     .text(function(d) {
+      // console.log('d[1] = ' + d[1]);
       return d[1];
+    })
+    .on('click', function(d) {
+
+      cityLocation = d[1];
+      // console.log(cityLocation);
     });
+
 
   var userGenCir = g.select('#userGen').selectAll('circle');
   userGenCir.on('click', function() {
     console.log('I am being clicked');
+    // console.log(userGenCirText[0]['parentNode']['__data__'][1]);
+    // var collapsedtreeRemove = d3.select('#collapsedtree').selectAll('g');
+
     collapsedtree();
+    // collapsedtreeRemove.remove();
   });
+  // .on('click', function() {
+  // var collapsedtreeRemove = d3.select('#collapsedtree').selectAll('g');
+  // collapsedtreeRemove.remove();
+  // });
 
 
 });
@@ -394,69 +412,123 @@ function getUserProfile(user) {
   };
 }
 
-// var userGenCir = g.select('#userGen').selectAll('circle');
-// userGenCir.on('click', function() {
-//   console.log('I am being clicked');
-//   collapsedtree();
-// });
+
+function searchStorage(info, object) {
+  var array = [];
+  for (var key in object) {
+    if (object[key].location === info) {
+      array.push(object[key]);
+    }
+  }
+  return array;
+}
+
+function createJSON(array) {
+  var object = {};
+  array.forEach(function(obj) {
+    object = {
+      name:  obj.location,
+      children: []
+    };
+    object.children.push(Flare(obj));
+  });
+  return object;
+}
+
+
+function Flare(object) {
+  var obj = {};
+    obj = {
+      "name": object.name,
+      "children": [{
+        "name": object.email
+      }, {
+        "name": object.company
+      }, {
+        "name": object.cohort
+      }],
+    };
+  
+
+  return obj;
+}
+
 
 function collapsedtree() {
 
-  var flare = {
-    "name": "San Francisco, CA",
-    "children": [{
-      "name": "Doug Shamoo",
-      "children": [{
-        "name": "something@example.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }, {
-        "name": "Greenfield",
-        "children": [{
-          "name": "Contextualize",
-          "url": "https://contextualize.herokuapp.com/"
-        }],
-        "url": "#/home"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Victoria Tapia",
-      "children": [{
-        "name": "something@example.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Rex Suter",
-      "children": [{
-        "name": "something@example.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }, {
-        "name": "Google",
-        "url": "https://www.google.com"
-      }],
-      "url": "#/home"
-    }, {
-      "name": "Verlon Smith",
-      "children": [{
-        "name": "vsmith3113@gmail.com"
-      }, {
-        "name": "Uber"
-      }, {
-        "name": "HRR8"
-      }],
-      "url": "#/home"
-    }],
-    "url": "#home"
-  };
+  var flare = createJSON(searchStorage(cityLocation, userStore));
+  console.log(flare);
+
+ // var flare =  {
+ //    "name":"Rapid City, SD",
+ //    "children":[
+ //      {"name":"Olivia Lopez",
+ //        "children":[
+ //          {"name":"OliviaLopez@myemail.com"},
+ //          {"name":"Aviato"},
+ //          {"name":"HRRB 4"}
+ //        ]
+ //      }
+ //    ]
+ //  };
+
+
+  //   var flare = {
+  //   "name": "San Francisco, CA",
+  //   "children": [{
+  //     "name": "Doug Shamoo",
+  //     "children": [{
+  //       "name": "something@example.com"
+  //     }, {
+  //       "name": "Uber"
+  //     }, {
+  //       "name": "HRR8"
+  //     }, {
+  //       "name": "Greenfield",
+  //       "children": [{
+  //         "name": "Contextualize",
+  //         "url": "https://contextualize.herokuapp.com/"
+  //       }],
+  //       "url": "#/home"
+  //     }],
+  //     "url": "#/home"
+  //   }, {
+  //     "name": "Victoria Tapia",
+  //     "children": [{
+  //       "name": "something@example.com"
+  //     }, {
+  //       "name": "Uber"
+  //     }, {
+  //       "name": "HRR8"
+  //     }],
+  //     "url": "#/home"
+  //   }, {
+  //     "name": "Rex Suter",
+  //     "children": [{
+  //       "name": "something@example.com"
+  //     }, {
+  //       "name": "Uber"
+  //     }, {
+  //       "name": "HRR8"
+  //     }, {
+  //       "name": "Google",
+  //       "url": "https://www.google.com"
+  //     }],
+  //     "url": "#/home"
+  //   }, {
+  //     "name": "Verlon Smith",
+  //     "children": [{
+  //       "name": "vsmith3113@gmail.com"
+  //     }, {
+  //       "name": "Uber"
+  //     }, {
+  //       "name": "HRR8"
+  //     }],
+  //     "url": "#/home"
+  //   }],
+  //   "url": "#home"
+  // };
+
 
   var margin = {
       top: 30,
@@ -479,6 +551,8 @@ function collapsedtree() {
     .projection(function(d) {
       return [d.y, d.x];
     });
+
+// console.log(margin.top, margin.left, margin.right);
 
   var svg = d3.select("#collapsedtree").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -529,23 +603,23 @@ function collapsedtree() {
       .style("opacity", 1e-6);
 
     // Enter any new nodes at the parent's previous position.
-    // nodeEnter.append("rect")
-    //   .attr("y", -barHeight / 2)
-    //   .attr("height", barHeight)
-    //   .attr("width", barWidth)
-    //   .style("fill", color)
-    //   .on("click", click); 
-
-    nodeEnter.append("svg:a")
-      .attr("xlink:href", function(d) {
-        return d.url;
-      }) // <-- reading the new "url" property
-      .append("svg:rect")
+    nodeEnter.append("rect")
       .attr("y", -barHeight / 2)
       .attr("height", barHeight)
       .attr("width", barWidth)
       .style("fill", color)
-      .on("click", click);
+      .on("click", click); 
+
+    // nodeEnter.append("svg:a")
+    //   .attr("xlink:href", function(d) {
+    //     return d.url;
+    //   }) // <-- reading the new "url" property
+    //   .append("svg:rect")
+    //   .attr("y", -barHeight / 2)
+    //   .attr("height", barHeight)
+    //   .attr("width", barWidth)
+    //   .style("fill", color)
+    //   .on("click", click);
 
     nodeEnter.append("text")
       .attr("dy", 3.5)
@@ -560,6 +634,7 @@ function collapsedtree() {
       .duration(duration)
       .attr("transform", function(d) {
         return "translate(" + d.y + "," + d.x + ")";
+        console.log(d.x, d.y, source.x, source.y);
       })
       .style("opacity", 1);
 
@@ -580,6 +655,7 @@ function collapsedtree() {
       })
       .style("opacity", 1e-6)
       .remove();
+      // console.log(d.x, d.y, source.x, source.y);
 
     // Update the links…
     var link = svg.selectAll("path.link")
