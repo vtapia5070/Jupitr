@@ -1,0 +1,26 @@
+{"name":"HRR8", "bubbles": [
+{"name":"Doug Shamoo",
+"description":[
+    {"name":"Uber","address":"http://www.uber.com"},
+    {"name":"Linkedin","address":"https://www.linkedin.com/in/dougshamoo"},
+    {"name":"GitHub","address":"https://github.com/dougshamoo"}
+]},
+{"name":"Verlon Smith",
+"description":[
+    {"name":"Uber","address":"http://www.uber.com"},
+    {"name":"Linkedin","address":"https://www.linkedin.com/pub/verlon-smith/b4/609/959"},
+    {"name":"GitHub","address":"https://github.com/kingedward35"}
+]},
+{"name":"Rex Suter",
+"description":[
+    {"name":"Uber","address":"http://www.uber.com"},
+    {"name":"Linkedin","address":"https://www.linkedin.com/in/rexsuter"},
+    {"name":"GitHub","address":"https://github.com/rex-en-abyme"}
+]},
+{"name":"Victoria Tapia",
+"description":[
+    {"name":"Uber","address":"http://www.uber.com"},
+    {"name":"Linkedin","address":"https://www.linkedin.com/in/victoriatapia1"},
+    {"name":"GitHub","address":"https://github.com/vtapia5070"}
+]}
+]}
