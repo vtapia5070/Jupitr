@@ -2,20 +2,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-// var everyauth = require('everyauth');
 var helpers = require('./utils/helpers');
 var user = require('../db/userController.js');
 var db = require('../db/config.js');
 
-
 var passport = require('passport');
 var LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
-// var util = require('util');
-var linkedinscraper = require("linkedin-scraper");
 
-// not sure if necessary
-// var connect = require('connect');
 var linkedinId, linkedinSecret;
 
 var app = express();
@@ -42,37 +36,6 @@ if (process.env.LINKEDIN_APP_ID && process.env.LINKEDIN_APP_SECRET) {
   linkedinSecret = config.linkedin.appSecret;
 }
 
-// everyauth.github
-//   .entryPath('/api/github')
-//   .appId(githubId)
-//   .appSecret(githubSecret)
-//   .scope('user')
-//   .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
-//     session.oauth = accessToken;
-//     session.uid = githubUserMetadata.login;
-//     session.userRecord = {
-//       name: githubUserMetadata.name,
-//       githublogin: githubUserMetadata.login,
-//       email: githubUserMetadata.email,
-//       githublink: 'https://github.com/' + githubUserMetadata.login
-//     };
-//     return session.uid;
-//   })
-//   .redirectPath('/auth');
-
-
-// // default logout path is /logout
-// everyauth.everymodule.logoutPath('/api/logout');
-// everyauth.everymodule.handleLogout( function (req, res) {
-//   req.logout(); 
-//   req.session.destroy(function(err){
-//     if (err) {
-//       throw err;
-//     }
-//   });
-//   res.redirect('/#/login');
-// });
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../client'));
@@ -82,7 +45,6 @@ app.use(session({
   resave: false,
   secret: 'infinity divded by infinity'
 }));
-// app.use(everyauth.middleware());
 
 /* =============================== BEGIN LINKEDIN AUTH ================================= */
 
@@ -155,32 +117,9 @@ app.get('/auth/linkedin/callback',
       linkedin: req.user._json.publicProfileUrl,
       // hasGivenPermission: true
     };
-    //TODO
-    new linkedinscraper(userData.linkedin, function (linkedinObject) {
-
-      if(linkedinObject.projects) {
-        var projectsArray = linkedinObject.projects;
-        for(var i=0; i<projectsArray.length; i++) {
-          if(i===0){
-            userData['project1Name'] = projectsArray[i].name;
-            userData['project1Url'] = projectsArray[i].projectlink;
-          } else if(i===1){
-            userData['project2Name'] = projectsArray[i].name;
-            userData['project2Url'] = projectsArray[i].projectlink;
-          } else if(i===2){
-            userData['project3Name'] = projectsArray[i].name;
-            userData['project3Url'] = projectsArray[i].projectlink;
-          }
-        }
-      }
-
-      user.addLinkedinData(userData, function() {
-      });
-
-      res.redirect('/#/profile');
+    user.addLinkedinData(userData, function() {
     });
-
-
+    res.redirect('/#/profile');
   });
 
 app.get('/logout', function(req, res){
@@ -219,7 +158,6 @@ passport.use(new GitHubStrategy({
       email: profile._json.email,
       githublink: 'https://github.com/' + profile._json.login,
     };
-    // console.log(req.session);
 
     process.nextTick(function () {
 
@@ -254,8 +192,6 @@ app.get('/auth/github/callback',
   // at least this way, it will be obvious if I break something
   passport.authenticate('github', { failureRedirect: '/somethingwentwrong' }),
   function(req, res) {
-    // console.log('Request:', req);
-    // console.log('Response:', res);
     res.redirect('/auth');
   });
 
@@ -265,16 +201,10 @@ app.get('/auth/github/callback',
 // route to get every single user record in db; check if has already requested
 app.get('/api/allusers', function(req, res) {
   helpers.validateUser(req, res, function(){
-    // if (!req.session.sendAllUsers) {
     user.sendAllUsers(function(users){
       console.log("user is ", users[0]);
-        // req.session.sendAllUsers = true;
       res.json(users);
     });
-    // }
-    // else {
-    //   res.end();  
-    // }
   });
 });
 

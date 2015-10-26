@@ -85,21 +85,6 @@ angular.module('jupitr.services', [])
     });
   };
 
-  // var create = function(user) {
-  //   return $http({
-  //     method: 'POST', 
-  //     url: '/api/users/' + user.id,
-  //     data: user
-  //   });
-  // }; 
-
-  // var deleteUser = function(user) {
-  //   return $http({
-  //     method: 'DELETE', 
-  //     url: '/api/users/' + user.id
-  //   });
-  // };
-
   return {
     getMyRecord: getMyRecord,
     getAll: getAll,
