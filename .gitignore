@@ -37,7 +37,7 @@ client/lib
 *.jshintrc
 
 # Config files
-server/utils/config.js
+server/utils/utilsConfig.js
 
 # .DS_Store
 */.DS_Store

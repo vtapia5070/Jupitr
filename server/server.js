@@ -9,19 +9,19 @@ var db = require('../db/config.js');
 var passport = require('passport');
 var LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
+var config = require('./utils/utilsConfig');
 
+var githubId, githubSecret;
 var linkedinId, linkedinSecret;
 
 var app = express();
 
-var githubId, githubSecret;
 var baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 
 if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_SECRET) {
   githubId = process.env.GITHUB_APP_ID;
   githubSecret = process.env.GITHUB_APP_SECRET;
 } else {
-  var config = require('./utils/config');
   githubId = config.github.appId;
   githubSecret = config.github.appSecret;
 }
@@ -31,7 +31,6 @@ if (process.env.LINKEDIN_APP_ID && process.env.LINKEDIN_APP_SECRET) {
   linkedinId = process.env.LINKEDIN_APP_ID;
   linkedinSecret = process.env.LINKEDIN_APP_SECRET;
 } else {
-  var config = require('./utils/config');
   linkedinId = config.linkedin.appId;
   linkedinSecret = config.linkedin.appSecret;
 }
@@ -39,7 +38,7 @@ if (process.env.LINKEDIN_APP_ID && process.env.LINKEDIN_APP_SECRET) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../client'));
-app.use(cookieParser('infinity divded by infinity'));
+app.use(cookieParser());
 app.use(session({
   saveUninitialized: true,
   resave: false,

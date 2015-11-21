@@ -1,6 +1,6 @@
 var user = require('./userController.js');
 var db = require('./config.js');
-var students = require('../server/utils/config.js').students;
+var students = require('../server/utils/utilsConfig.js').students;
 
 for (var i = 0; i < students.length; i++) {
   //user.addUser(generateRandomUser(), function() {
